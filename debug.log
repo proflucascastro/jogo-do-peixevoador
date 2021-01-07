@@ -1,0 +1,8 @@
+[0105/190410.383:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0105/191908.564:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0105/203328.396:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0105/220352.610:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0105/222445.512:ERROR:settings.cc(325)] Settings version is not 1
+[0106/102253.521:ERROR:settings.cc(325)] Settings version is not 1
+[0106/112602.460:ERROR:settings.cc(325)] Settings version is not 1
+[0106/113602.474:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
