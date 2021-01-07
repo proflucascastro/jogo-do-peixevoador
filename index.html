@@ -47,7 +47,7 @@
             const base = new Fundo(animacao, 0, canvas.height - imagens['base'].height, 0.8, 0, imagens['base'], 'horizontal');
 
             imgsPeixe = [imagens['redbird-midflap'], imagens['redbird-upflap'], imagens['redbird-downflap']];
-            const peixe = new Peixe(animacao, 100, canvas.height/2, 0, 1, imgsPeixe);
+            const peixe = new Peixe(animacao, 100, canvas.height/4, 0, 0, imgsPeixe);
             
             animacao.incluirSprite(fundo);
             animacao.incluirSprite(base, true);

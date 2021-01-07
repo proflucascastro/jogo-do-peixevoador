@@ -3,10 +3,10 @@ class Peixe extends Sprite {
         super(animacao, x, y, velocidadeX, velocidadeY)
         this.imagens = imagens;
         this.imagem = imagens[0];
-        this.forca = 50;
-        this.gravidade = -this.forca/2;
-        this.qtdeUp = 0;
-        this.limteUP = 3;
+        this.forca = 3.5;
+        this.gravidade = 0.2;
+        this.frame = 0;
+        this.timeTime = 10;
     }
 
     get nome() {
@@ -14,27 +14,20 @@ class Peixe extends Sprite {
     }
 
     atualizar() {
-        if (this.animacao.teclado.pressionada(SETA_PARA_CIMA) && this.limteUP > this.qtdeUp) {
-            this.qtdeUp++;
-            this.y -= this.velocidadeY;
-            if (this.gravidade < this.forca/2) this.gravidade = this.forca;
-        } else if (this.animacao.teclado.pressionada(SETA_PARA_BAIXO)) {
-            this.gravidade = 0;            
-            this.y += this.velocidadeY;
-        }
 
-        if (this.gravidade > 0) {
-            if (this.y > 0) {
-                this.y -= this.velocidadeY;
-                this.imagem = this.imagens[2];
-            }
-        } else {
-            this.imagem = this.imagens[1];
-            this.y += this.velocidadeY;
-            this.qtdeUp = 0;
-        }
-        this.gravidade--;
+        this.frame++
+        this.imagem = this.imagens[Math.floor(this.frame/this.timeTime)];
+        if (this.frame == (this.timeTime * this.imagens.length - 1)) this.frame = 0;
+
+        if (this.animacao.teclado.pressionada(SETA_PARA_CIMA)) {
+            this.velocidadeY = -this.forca;
+        } 
+
+        this.velocidadeY += this.gravidade;
+        if (this.y + this.velocidadeY >= 0) this.y += this.velocidadeY;
     }
+
+
 
     desenhar() {
         this.animacao.contexto.drawImage(this.imagem, this.x, this.y)

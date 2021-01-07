@@ -6,3 +6,4 @@
 [0106/102253.521:ERROR:settings.cc(325)] Settings version is not 1
 [0106/112602.460:ERROR:settings.cc(325)] Settings version is not 1
 [0106/113602.474:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)
+[0107/113651.434:ERROR:directory_reader_win.cc(43)] FindFirstFile: O sistema não pode encontrar o caminho especificado. (0x3)

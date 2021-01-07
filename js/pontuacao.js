@@ -13,7 +13,7 @@ class Pontuacao {
     }
 
     atualizar() {
-        console.log(this.pontos);
+        
     }
 
     desenhar() {
