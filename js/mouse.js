@@ -17,7 +17,6 @@ class Mouse {
     }
 
     click(estado) {
-        console.log('clicou');
         if (this.estados[this.estadoAtual]) this.estados[this.estadoAtual]();
     }
 

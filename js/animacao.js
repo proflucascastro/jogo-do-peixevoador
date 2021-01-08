@@ -4,8 +4,10 @@ class Animacao {
         this.teclado = teclado;
         this.sprites = [];
         this.spritesTelaInicial = [];
+        this.spritesTelaGameOver = [];
         this.rotinas = [];
         this.ligado = false;
+        this.estado = 'parado';;
     }
 
     incluirSprite(sprite, frente = false) {
@@ -49,7 +51,8 @@ class Animacao {
 
     iniciar() {
         this.ligado = true;
-        mouse.estado('loop');
+        this.estado = 'loop'
+        mouse.estado(this.estado);
     }
 
     parar() {
@@ -60,11 +63,16 @@ class Animacao {
         this.ligado = !this.ligado;
         
         if (this.ligado) {
-            mouse.estado('loop');
+            if (this.estado == 'gameOver') {
+                this.telaInicial();
+            } else {
+                this.estado = 'loop';
+            }
         } else {
             this.escreverMsg("Enter ou Click para retornar");
-            mouse.estado('parado');
+            this.estado ='parado';
         }
+        mouse.estado(this.estado);
     }
 
     limparTela() {
@@ -88,11 +96,31 @@ class Animacao {
 
     }
 
+    gameOver() {
+        this.desenharSpritesTelaGameOver();
+        this.ligado = false;
+        this.estado = 'gameOver';
+        mouse.estado(this.estado);
+
+    }
+    
+    incluirSpriteTelaGameOver(sprite) {
+        this.spritesTelaGameOver.push(sprite);
+    }
+
+    desenharSpritesTelaGameOver() {
+        this.spritesTelaGameOver.forEach ((x) => {
+            x.desenhar()
+        });
+    }
+
     telaInicial() {
         this.inicializarSprites();
         this.limparTela();
         this.desenharSpritesTelaInicial();
         this.ligado = false;
+        this.estado = 'parado';
+        mouse.estado(this.estado);
 
     }
     
