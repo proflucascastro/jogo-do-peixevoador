@@ -2,6 +2,7 @@ class Pontuacao {
     constructor(animacao) {
         this.animacao = animacao;
         this.pontos = 0;
+        this.incluirInicializacao = true;
     }
 
     get nome(){
@@ -10,6 +11,7 @@ class Pontuacao {
 
     incrementa(){
         this.pontos += 0.5;
+        somPONTO.play();
     }
 
     atualizar() {
@@ -26,5 +28,9 @@ class Pontuacao {
         ctx.fillText(`Pontos: ${this.pontos} `, ctx.canvas.width/2, 25);
 
         ctx.restore();
+    }
+
+    inicializar(){
+        this.pontos = 0;
     }
 }

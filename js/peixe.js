@@ -7,10 +7,15 @@ class Peixe extends Sprite {
         this.gravidade = 0.2;
         this.frame = 0;
         this.timeTime = 10;
+        
     }
 
     get nome() {
         return Peixe.name;
+    }
+
+    click() {
+        this.velocidadeY = -this.forca;
     }
 
     atualizar() {
@@ -27,9 +32,4 @@ class Peixe extends Sprite {
         if (this.y + this.velocidadeY >= 0) this.y += this.velocidadeY;
     }
 
-
-
-    desenhar() {
-        this.animacao.contexto.drawImage(this.imagem, this.x, this.y)
-    }
 }

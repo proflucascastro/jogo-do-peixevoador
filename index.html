@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo do Peixe Voador</title>
     <script src="js/animacao.js"></script>
+    <script src="js/colisor.js"></script>
     <script src="js/teclado.js"></script>
+    <script src="js/mouse.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/pontuacao.js"></script>
     <script src="js/imagens.js"></script>
     <script src="js/geradorSprites.js"></script>
     <script src="js/sprite.js"></script>
     <script src="js/fundo.js"></script>
+    <script src="js/chao.js"></script>
     <script src="js/tubo.js"></script>
     <script src="js/peixe.js"></script>
 </head>
@@ -24,9 +27,14 @@
         const canvas = document.getElementById('canvas-jogo');
         const contexto = canvas.getContext('2d');
         const teclado = new Teclado(document);
+        const mouse = new Mouse(document);
         const animacao = new Animacao(contexto, teclado);
         const pontuacao = new Pontuacao(animacao);
         const geradorSprites = new GeradorSprites(animacao, pontuacao);
+        const colisor = new Colisor(animacao);
+        
+        const somPONTO = new Audio('snd/point.wav');
+            somPONTO.load();
 
         const listaImagens = [
             'background-day',
@@ -35,30 +43,63 @@
             'pipe-green-up',
             'redbird-midflap',
             'redbird-upflap',
-            'redbird-downflap'
+            'redbird-downflap',
+            'message'
         ]
 
         let imagens;
         imagens = carregarImagens(listaImagens, carregando);
 
         function iniciar() {
-            
+            const VelocidadeTubos = 1.5;
+
             const fundo = new Fundo(animacao, 0, 0, 0.5, 0, imagens['background-day'], 'horizontal');
-            const base = new Fundo(animacao, 0, canvas.height - imagens['base'].height, 0.8, 0, imagens['base'], 'horizontal');
+            const chao = new Chao(animacao, 0, canvas.height - imagens['base'].height, VelocidadeTubos, 0, imagens['base'], 'horizontal');
 
             imgsPeixe = [imagens['redbird-midflap'], imagens['redbird-upflap'], imagens['redbird-downflap']];
             const peixe = new Peixe(animacao, 100, canvas.height/4, 0, 0, imgsPeixe);
+
+            const message = new Sprite(
+                animacao, 
+                canvas.width/2 - imagens['message'].width/2, 
+                canvas.height/2 - imagens['message'].height/2,
+                0, 0
+                )
+            message.imagem = imagens['message'];
             
+            animacao.incluirSpriteTelaInicial(fundo);
+            animacao.incluirSpriteTelaInicial(chao);
+            animacao.incluirSpriteTelaInicial(peixe);
+            animacao.incluirSpriteTelaInicial(message);
+
             animacao.incluirSprite(fundo);
-            animacao.incluirSprite(base, true);
+            animacao.incluirSprite(chao, true);
             animacao.incluirSprite(peixe);
             animacao.incluirSprite(pontuacao, true);
+
+            colisor.novoPar(Peixe.name, Chao.name, () => {
+                alert("Peixe colidiu com a base");
+                animacao.telaInicial();
+            });
+            colisor.novoPar(Peixe.name, Tubo.name, () => {
+                alert("Peixe colidiu com o tubo");
+                animacao.telaInicial();
+            });
             
-            animacao.incluirRotina(() => geradorSprites.novoParTudo(0.8));
             
-            animacao.iniciar();
+            animacao.incluirRotina(() => geradorSprites.novoParTudo(VelocidadeTubos));
+            teclado.disparou(ENTER, () => animacao.pausar());
+            
+            mouse.onClick('parado', () => animacao.pausar());
+            mouse.onClick('loop', () => peixe.click());
+
+            mouse.estado('parado');
+
+            animacao.telaInicial();
+            
             animacao.loop();
         }
+
         let qtdeImagensCarregadas = 0;
         function carregando() {
             qtdeImagensCarregadas++

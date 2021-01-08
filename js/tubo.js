@@ -5,6 +5,7 @@ class Tubo extends Sprite {
         this.pontuacao = pontuacao;
         this.pontuado = false;
         this.peixe = animacao.sprites.filter(x => x.nome == Peixe.name)[0];
+        this.incluirInicializacao = false;
     }
 
     get nome() {
@@ -22,7 +23,4 @@ class Tubo extends Sprite {
         } 
     }
 
-    desenhar() {
-        this.animacao.contexto.drawImage(this.imagem, this.x, this.y);
-    }
 }
