@@ -91,8 +91,7 @@ class Animacao {
             this.processarColisoes();
         }
 
-        const that = this;
-        requestAnimationFrame(() => that.loop());
+        requestAnimationFrame(() => this.loop());
 
     }
 
