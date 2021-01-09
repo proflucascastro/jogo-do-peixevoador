@@ -1,9 +1,10 @@
 class Mouse {
-    constructor(document) {
+    constructor(contexto) {
+        this.contexto = contexto
         this.estados = [];
         this.estadoAtual = ''
 
-        document.addEventListener('click',() => this.click());
+        this.contexto.canvas.addEventListener('click',() => this.click());
        
     }
 

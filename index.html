@@ -27,7 +27,7 @@
         const canvas = document.getElementById('canvas-jogo');
         const contexto = canvas.getContext('2d');
         const teclado = new Teclado(document);
-        const mouse = new Mouse(document);
+        const mouse = new Mouse(contexto);
         const animacao = new Animacao(contexto, teclado);
         const pontuacao = new Pontuacao(animacao);
         const geradorSprites = new GeradorSprites(animacao, pontuacao);
